@@ -3,9 +3,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
-def parse_resume():
+def parse_resume(file_path):
 
-    reader=PdfReader('resume.pdf')
+    reader=PdfReader(file_path)
 
     # print(len(reader.pages))
 
@@ -14,7 +14,7 @@ def parse_resume():
     # print(page.extract_text())
     return page.extract_text()
 
-def calculate_resume_score(job_desc_text):
+def calculate_resume_score(resume_text,job_desc_text):
     """
     Compares resume text with job description text using TF-IDF and Cosine Similarity.
     
@@ -28,7 +28,7 @@ def calculate_resume_score(job_desc_text):
     
     # Convert text into numerical vectors
     vectorizer = TfidfVectorizer(stop_words='english')
-    resume_text=parse_resume();
+    # resume_text=parse_resume();
     tfidf_matrix = vectorizer.fit_transform([resume_text, job_desc_text])
     
     # Compute cosine similarity between resume and job description
